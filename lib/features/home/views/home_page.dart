@@ -20,17 +20,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.grey[200],
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.grey[200],
         appBar: const CustomAppBar(
           title: 'Repositories',
         ),
-        body: HomeView(
-          searchController: _searchController,
-          onSearchPressed: _onSearchPressed,
-          repositories: context.watch<HomeCubit>().state.repository,
-          onShowIssuePressed: (repo) => _onShowIssuePressed(repo),
-          onShowPRsPressed: (repo) => _onShowPRPressed(repo),
+        body: BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            return HomeView(
+              searchController: _searchController,
+              onSearchPressed: _onSearchPressed,
+              repositories: state.repository,
+              isLoading: state.isLoading,
+              onShowIssuePressed: (repo) => _onShowIssuePressed(repo),
+              onShowPRsPressed: (repo) => _onShowPRPressed(repo),
+            );
+          },
         ));
   }
 

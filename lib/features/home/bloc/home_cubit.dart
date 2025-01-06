@@ -15,9 +15,10 @@ class HomeCubit extends Cubit<HomeState> {
   final GetReposByNameUseCase _getReposByNameUseCase;
 
   Future<void> searchRepository(String param) async {
+    emit(state.copyWith(isLoading: true));
     (await _getReposByNameUseCase(param: param)).fold(
       (l) => emit(state.copyWith(error: l)),
-      (r) => emit(state.copyWith(repository: r, searcherQuery: param)),
+      (r) => emit(state.copyWith(repository: r, searcherQuery: param, isLoading: false)),
     );
   }
 }

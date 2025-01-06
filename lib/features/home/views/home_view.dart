@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:github_repo_app/app/router.dart';
+import 'package:github_repo_app/features/home/bloc/home_cubit.dart';
 import 'package:github_repo_app/features/home/widgets/repos_list_view.dart';
 import 'package:github_repo_app/modules/domain/github_repo/model/repository.dart';
 import 'package:github_repo_app/modules/foundation/theme/app_colors.dart';
@@ -13,6 +16,7 @@ class HomeView extends StatelessWidget {
     required this.repositories,
     required this.onShowIssuePressed,
     required this.onShowPRsPressed,
+    required this.isLoading,
   });
 
   final TextEditingController searchController;
@@ -20,6 +24,7 @@ class HomeView extends StatelessWidget {
   final Repository? repositories;
   final Function(RepositoryData repo) onShowIssuePressed;
   final Function(RepositoryData repo) onShowPRsPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,9 @@ class HomeView extends StatelessWidget {
       const SizedBox(
         height: 16,
       ),
+      if(isLoading)
+        const Center(child: CircularProgressIndicator())
+      else
       repositories != null && repositories?.items.isNotEmpty == true
           ? ReposListView(
               repositories: repositories,
