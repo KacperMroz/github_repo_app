@@ -14,9 +14,9 @@ class PullRequestRepositoryImpl extends PullRequestRepository {
   PullRequestRepositoryImpl(this.apiClient);
 
   @override
-  Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(String owner, String repo) async {
+  Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
-      final Response response = await apiClient.get('https://api.github.com/repos/$owner/$repo/pulls');
+      final Response response = await apiClient.get('https://api.github.com/repos/$owner/$repoName/pulls');
       return PullRequestsList.fromJson({'items': response.data});
     });
   }

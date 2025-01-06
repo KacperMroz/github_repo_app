@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:github_repo_app/app/router.dart';
-import 'package:github_repo_app/features/home/bloc/home_cubit.dart';
 import 'package:github_repo_app/features/home/widgets/repos_list_view.dart';
 import 'package:github_repo_app/modules/domain/github_repo/model/repository.dart';
 import 'package:github_repo_app/modules/foundation/theme/app_colors.dart';
@@ -41,17 +38,17 @@ class HomeView extends StatelessWidget {
       const SizedBox(
         height: 16,
       ),
-      if(isLoading)
+      if (isLoading)
         const Center(child: CircularProgressIndicator())
       else
-      repositories != null && repositories?.items.isNotEmpty == true
-          ? ReposListView(
-              repositories: repositories,
-              onShowIssuePressed: onShowIssuePressed,
-              onShowPRsPressed: onShowPRsPressed)
-          : const Center(
-              child: Text('No repositories found'),
-            )
+        repositories != null && repositories?.items.isNotEmpty == true
+            ? ReposListView(
+                repositories: repositories,
+                onShowIssuePressed: onShowIssuePressed,
+                onShowPRsPressed: onShowPRsPressed)
+            : const Center(
+                child: Text('No repositories found'),
+              )
     ]);
   }
 }

@@ -17,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> searchRepository(String param) async {
     emit(state.copyWith(isLoading: true));
     (await _getReposByNameUseCase(param: param)).fold(
-      (l) => emit(state.copyWith(error: l)),
+      (l) => emit(state.copyWith(error: l, isLoading: false)),
       (r) => emit(state.copyWith(repository: r, searcherQuery: param, isLoading: false)),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:github_repo_app/app/router.dart';
 import 'package:github_repo_app/features/home/bloc/home_cubit.dart';
 import 'package:github_repo_app/features/home/views/home_view.dart';
 import 'package:github_repo_app/features/widgets/custom_app_bar.dart';

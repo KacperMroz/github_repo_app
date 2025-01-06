@@ -55,13 +55,13 @@ void main() {
     });
 
     test('should return AppError when the param is empty', () async {
-      final tError = const AppError.unknown();
+      const tError = AppError.unknown();
       when(() => mockGithubRepoRepository.getReposByName(any()))
-          .thenAnswer((_) async => Left(tError));
+          .thenAnswer((_) async => const Left(tError));
 
       final result = await mockGetReposByNameUseCase.call(param: '');
 
-      expect(result, Left(tError));
+      expect(result, const Left(tError));
       verify(() => mockGithubRepoRepository.getReposByName(''));
       verifyNoMoreInteractions(mockGithubRepoRepository);
     });

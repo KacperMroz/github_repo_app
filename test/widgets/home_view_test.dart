@@ -13,6 +13,7 @@ void main() {
         home: MaterialApp(
           home: Scaffold(
             body: HomeView(
+              isLoading: false,
               searchController: searchController,
               onSearchPressed: () {},
               repositories: const Repository(items: []),
@@ -34,6 +35,7 @@ void main() {
         home: MaterialApp(
           home: Scaffold(
             body: HomeView(
+              isLoading: false,
               searchController: searchController,
               onSearchPressed: () {},
               repositories: repositories,
@@ -54,6 +56,7 @@ void main() {
         home: MaterialApp(
           home: Scaffold(
             body: HomeView(
+              isLoading: false,
               searchController: searchController,
               onSearchPressed: () {},
               repositories: const Repository(items: []),
@@ -66,6 +69,26 @@ void main() {
 
       expect(find.byType(ReposListView), findsNothing);
       expect(find.text('No repositories found'), findsOneWidget);
+    });
+
+    testWidgets('displays CircularProgressIndicator when isLoading is true', (WidgetTester tester) async {
+      final searchController = TextEditingController();
+      await tester.pumpWidget(MaterialApp(
+        home: MaterialApp(
+          home: Scaffold(
+            body: HomeView(
+              isLoading: true,
+              searchController: searchController,
+              onSearchPressed: () {},
+              repositories: const Repository(items: []),
+              onShowIssuePressed: (repo) {},
+              onShowPRsPressed: (repo) {},
+            ),
+          ),
+        ),
+      ));
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
   });
 }

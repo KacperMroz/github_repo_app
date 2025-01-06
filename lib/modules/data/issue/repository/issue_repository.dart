@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:github_repo_app/modules/domain/issue/model/issue.dart';
@@ -16,9 +14,11 @@ class IssueRepositoryImpl extends IssueRepository {
   IssueRepositoryImpl(this.apiClient);
 
   @override
-  Future<Either<AppError, IssuesList>> getIssuesForRepo(String owner, String repo) async {
+  Future<Either<AppError, IssuesList>> getIssuesForRepo(
+      String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
-      final Response response = await apiClient.get('https://api.github.com/repos/$owner/$repo/issues');
+      final Response response = await apiClient
+          .get('https://api.github.com/repos/$owner/$repoName/issues');
       return IssuesList.fromJson({'items': response.data});
     });
   }

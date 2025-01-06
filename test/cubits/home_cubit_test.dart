@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:github_repo_app/features/home/bloc/home_cubit.dart';
 import 'package:github_repo_app/modules/domain/github_repo/model/repository.dart';
 import 'package:github_repo_app/modules/domain/github_repo/use_case/get_repos_by_name_use_case.dart';
 import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockGetReposByNameUseCase extends Mock implements GetReposByNameUseCase {}
 
@@ -32,8 +32,11 @@ void main() {
       },
       act: (cubit) => cubit.searchRepository(tRepoName),
       expect: () => [
-        isA<HomeState>().having((state) => state.repository, 'repository', tRepository)
-            .having((state) => state.searcherQuery, 'searcherQuery', tRepoName),
+        isA<HomeState>().having((state) => state.isLoading, 'isLoading', true),
+        isA<HomeState>()
+            .having((state) => state.repository, 'repository', tRepository)
+            .having((state) => state.searcherQuery, 'searcherQuery', tRepoName)
+            .having((state) => state.isLoading, 'isLoading', false),
       ],
       verify: (_) {
         verify(() => mockGetReposByNameUseCase(param: tRepoName));
@@ -49,7 +52,10 @@ void main() {
       },
       act: (cubit) => cubit.searchRepository(tRepoName),
       expect: () => [
-        isA<HomeState>().having((state) => state.error, 'error', tError),
+        isA<HomeState>().having((state) => state.isLoading, 'isLoading', true),
+        isA<HomeState>()
+            .having((state) => state.error, 'error', tError)
+            .having((state) => state.isLoading, 'isLoading', false),
       ],
       verify: (_) {
         verify(() => mockGetReposByNameUseCase(param: tRepoName));
@@ -65,7 +71,10 @@ void main() {
       },
       act: (cubit) => cubit.searchRepository(''),
       expect: () => [
-        isA<HomeState>().having((state) => state.error, 'error', tError),
+        isA<HomeState>().having((state) => state.isLoading, 'isLoading', true),
+        isA<HomeState>()
+            .having((state) => state.error, 'error', tError)
+            .having((state) => state.isLoading, 'isLoading', false),
       ],
       verify: (_) {
         verify(() => mockGetReposByNameUseCase(param: ''));
