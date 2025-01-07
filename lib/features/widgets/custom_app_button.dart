@@ -26,8 +26,8 @@ class CustomAppButton extends StatelessWidget {
             Text(
               title,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: AppColors.appWhite,
-              ),
+                    color: AppColors.appWhite,
+                  ),
             ),
             const SizedBox(
               width: 5,

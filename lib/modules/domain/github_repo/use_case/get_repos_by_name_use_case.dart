@@ -6,7 +6,8 @@ import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetReposByNameUseCase implements OneParamUseCase<AppError, Repository, String> {
+class GetReposByNameUseCase
+    implements OneParamUseCase<AppError, Repository, String> {
   GetReposByNameUseCase(this._githubRepoRepository);
 
   final GithubRepoRepository _githubRepoRepository;

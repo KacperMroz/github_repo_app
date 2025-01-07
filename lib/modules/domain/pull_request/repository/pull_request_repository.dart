@@ -3,5 +3,6 @@ import 'package:github_repo_app/modules/domain/pull_request/model/pull_request.d
 import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
 
 abstract class PullRequestRepository {
-  Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(String owner, String repoName);
+  Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(
+      String owner, String repoName);
 }

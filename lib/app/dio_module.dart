@@ -26,7 +26,8 @@ abstract class DioModule {
 
     (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       final HttpClient client = HttpClient();
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
       return client;
     };
 

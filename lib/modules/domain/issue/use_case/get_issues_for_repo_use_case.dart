@@ -12,7 +12,8 @@ class GetIssuesForRepoUseCase implements ParamUseCase<AppError, IssuesList> {
   final IssueRepository _issueRepository;
 
   @override
-  Future<Either<AppError, IssuesList>> call({required dynamic param, required dynamic param2}) {
+  Future<Either<AppError, IssuesList>> call(
+      {required dynamic param, required dynamic param2}) {
     return _issueRepository.getIssuesForRepo(param, param2);
   }
 }

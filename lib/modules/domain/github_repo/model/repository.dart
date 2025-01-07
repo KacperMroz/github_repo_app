@@ -4,17 +4,18 @@ part 'repository.freezed.dart';
 part 'repository.g.dart';
 
 @freezed
-class Repository with _$Repository{
+class Repository with _$Repository {
   const factory Repository({
     @Default(0) int count,
     @Default([]) List<RepositoryData> items,
   }) = _Repository;
 
-  factory Repository.fromJson(Map<String, dynamic> json) => _$RepositoryFromJson(json);
+  factory Repository.fromJson(Map<String, dynamic> json) =>
+      _$RepositoryFromJson(json);
 }
 
 @freezed
-class RepositoryData with _$RepositoryData{
+class RepositoryData with _$RepositoryData {
   const factory RepositoryData({
     @Default(0) int id,
     @Default('') String name,
@@ -25,15 +26,17 @@ class RepositoryData with _$RepositoryData{
     RepositoryOwner? owner,
   }) = _RepositoryData;
 
-  factory RepositoryData.fromJson(Map<String, dynamic> json) => _$RepositoryDataFromJson(json);
+  factory RepositoryData.fromJson(Map<String, dynamic> json) =>
+      _$RepositoryDataFromJson(json);
 }
 
 @freezed
-class RepositoryOwner with _$RepositoryOwner{
+class RepositoryOwner with _$RepositoryOwner {
   const factory RepositoryOwner({
     @Default(0) int id,
     @Default('') String login,
   }) = _RepositoryOwner;
 
-  factory RepositoryOwner.fromJson(Map<String, dynamic> json) => _$RepositoryOwnerFromJson(json);
+  factory RepositoryOwner.fromJson(Map<String, dynamic> json) =>
+      _$RepositoryOwnerFromJson(json);
 }

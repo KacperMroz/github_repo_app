@@ -21,8 +21,7 @@ class IssuesView extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "$displayIndex.    ${issues?.items[index].title ??
-                          " - "}",
+                  "$displayIndex.    ${issues?.items[index].title ?? " - "}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),

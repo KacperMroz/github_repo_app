@@ -15,8 +15,13 @@ class IssuesCubit extends Cubit<IssuesState> {
 
   Future<void> getIssuesByRepo(String owner, String repo) async {
     (await _getIssuesByRepoUseCase(param: owner, param2: repo)).fold(
-        (l) => emit(state.copyWith(error: l)),
-        (r) => emit(state.copyWith(issues: r)));
+      (l) => emit(
+        state.copyWith(error: l),
+      ),
+      (r) => emit(
+        state.copyWith(issues: r),
+      ),
+    );
   }
 }
 

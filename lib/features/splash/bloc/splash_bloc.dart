@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 part 'splash_bloc.freezed.dart';
 
 @injectable
-class SplashCubit extends Cubit<SplashState>{
+class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(const Initial());
 
   Future<void> initialize() async {
@@ -17,6 +17,8 @@ class SplashCubit extends Cubit<SplashState>{
 @freezed
 class SplashState with _$SplashState {
   const factory SplashState.initial() = Initial;
+
   const factory SplashState.success() = Success;
+
   const factory SplashState.error() = Error;
 }

@@ -25,30 +25,33 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      RepoSearchRow(
-          searchController: searchController, onSearchPressed: onSearchPressed),
-      const SizedBox(
-        height: 8,
-      ),
-      const Divider(
-        height: 1,
-        color: AppColors.appGrey,
-      ),
-      const SizedBox(
-        height: 16,
-      ),
-      if (isLoading)
-        const Center(child: CircularProgressIndicator())
-      else
-        repositories != null && repositories?.items.isNotEmpty == true
-            ? ReposListView(
-                repositories: repositories,
-                onShowIssuePressed: onShowIssuePressed,
-                onShowPRsPressed: onShowPRsPressed)
-            : const Center(
-                child: Text('No repositories found'),
-              )
-    ]);
+    return Column(
+      children: [
+        RepoSearchRow(
+            searchController: searchController,
+            onSearchPressed: onSearchPressed),
+        const SizedBox(
+          height: 8,
+        ),
+        const Divider(
+          height: 1,
+          color: AppColors.appGrey,
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        if (isLoading)
+          const Center(child: CircularProgressIndicator())
+        else
+          repositories != null && repositories?.items.isNotEmpty == true
+              ? ReposListView(
+                  repositories: repositories,
+                  onShowIssuePressed: onShowIssuePressed,
+                  onShowPRsPressed: onShowPRsPressed)
+              : const Center(
+                  child: Text('No repositories found'),
+                ),
+      ],
+    );
   }
 }

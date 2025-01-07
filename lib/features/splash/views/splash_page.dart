@@ -16,8 +16,7 @@ class SplashPage extends StatelessWidget {
             success: () {
               context.go(NavigationService.home);
             },
-            orElse: () => const SizedBox()
-        );
+            orElse: () => const SizedBox());
       },
       child: const Scaffold(
         backgroundColor: Colors.white,

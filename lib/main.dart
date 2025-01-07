@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_repo_app/injection/injection.dart';
+
 import 'app/app.dart';
 
 void main() {
@@ -7,5 +8,3 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(GitHubRepoApp());
 }
-
-

@@ -20,11 +20,6 @@ class PullRequestPage extends StatefulWidget {
 
 class _IssuesPageState extends State<PullRequestPage> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: 'PRs for ${widget.repoName}'),

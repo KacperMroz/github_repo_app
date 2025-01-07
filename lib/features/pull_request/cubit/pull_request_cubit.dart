@@ -9,7 +9,8 @@ part 'pull_request_cubit.freezed.dart';
 
 @injectable
 class PullRequestCubit extends Cubit<PullRequestState> {
-  PullRequestCubit(this._getPullRequestForRepoUseCase) : super(const PullRequestState());
+  PullRequestCubit(this._getPullRequestForRepoUseCase)
+      : super(const PullRequestState());
 
   final GetPullRequestForRepoUseCase _getPullRequestForRepoUseCase;
 
