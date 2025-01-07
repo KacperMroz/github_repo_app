@@ -17,7 +17,7 @@ class GithubRepoRepositoryImpl extends GithubRepoRepository {
   Future<Either<AppError, Repository>> getReposByName(String name) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
       final Response response = await apiClient.get(
-          'https://api.github.com/search/repositories?q=$name&sort=stars&order=desc');
+          '/search/repositories?q=$name&sort=stars&order=desc');
       return Repository.fromJson(response.data);
     });
   }

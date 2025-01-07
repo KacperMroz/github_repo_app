@@ -18,7 +18,7 @@ class IssueRepositoryImpl extends IssueRepository {
       String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
       final Response response = await apiClient
-          .get('https://api.github.com/repos/$owner/$repoName/issues');
+          .get('/repos/$owner/$repoName/issues');
       return IssuesList.fromJson({'items': response.data});
     });
   }

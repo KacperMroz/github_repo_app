@@ -13,7 +13,7 @@ abstract class DioModule {
   Dio _getDio() {
     final Dio dio = Dio(
       BaseOptions(
-        baseUrl: '',
+        baseUrl: 'https://api.github.com',
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         sendTimeout: const Duration(seconds: 60),

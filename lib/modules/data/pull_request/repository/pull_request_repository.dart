@@ -18,7 +18,7 @@ class PullRequestRepositoryImpl extends PullRequestRepository {
       String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
       final Response response = await apiClient
-          .get('https://api.github.com/repos/$owner/$repoName/pulls');
+          .get('/repos/$owner/$repoName/pulls');
       return PullRequestsList.fromJson({'items': response.data});
     });
   }
