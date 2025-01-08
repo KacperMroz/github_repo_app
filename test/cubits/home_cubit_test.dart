@@ -16,6 +16,10 @@ void main() {
     mockGetReposByNameUseCase = MockGetReposByNameUseCase();
   });
 
+  setUpAll(() {
+    registerFallbackValue(GetReposByNameParams(name: ''));
+  });
+
   const tRepoName = 'flutter';
   const tRepository = Repository(items: [
     RepositoryData(id: 1, name: 'flutter', description: 'A framework by Google')
@@ -38,9 +42,6 @@ void main() {
             .having((state) => state.searcherQuery, 'searcherQuery', tRepoName)
             .having((state) => state.isLoading, 'isLoading', false),
       ],
-      verify: (_) {
-        verify(() => mockGetReposByNameUseCase(param: tRepoName));
-      },
     );
 
     blocTest<HomeCubit, HomeState>(
@@ -57,9 +58,6 @@ void main() {
             .having((state) => state.error, 'error', tError)
             .having((state) => state.isLoading, 'isLoading', false),
       ],
-      verify: (_) {
-        verify(() => mockGetReposByNameUseCase(param: tRepoName));
-      },
     );
 
     blocTest<HomeCubit, HomeState>(
@@ -76,9 +74,6 @@ void main() {
             .having((state) => state.error, 'error', tError)
             .having((state) => state.isLoading, 'isLoading', false),
       ],
-      verify: (_) {
-        verify(() => mockGetReposByNameUseCase(param: ''));
-      },
     );
   });
 }

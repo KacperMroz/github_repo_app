@@ -15,9 +15,11 @@ class PullRequestCubit extends Cubit<PullRequestState> {
   final GetPullRequestForRepoUseCase _getPullRequestForRepoUseCase;
 
   Future<void> getPullRequestByRepo(String owner, String repo) async {
-    (await _getPullRequestForRepoUseCase(param: owner, param2: repo)).fold(
-        (l) => emit(state.copyWith(error: l)),
-        (r) => emit(state.copyWith(pullRequests: r)));
+    (await _getPullRequestForRepoUseCase(
+      param: GetPullRequestForRepoParams(owner: owner, repo: repo),
+    ))
+        .fold((error) => emit(state.copyWith(error: error)),
+            (repository) => emit(state.copyWith(pullRequests: repository)));
   }
 }
 
@@ -28,6 +30,4 @@ class PullRequestState with _$PullRequestState {
     PullRequestsList? pullRequests,
     AppError? error,
   }) = _PullRequestState;
-
-  const PullRequestState._();
 }

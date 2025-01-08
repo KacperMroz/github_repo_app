@@ -203,14 +203,13 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HomeStateImpl extends _HomeState {
+class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.isLoading = false,
       this.repository,
       this.error,
       this.searcherQuery,
-      this.issues})
-      : super._();
+      this.issues});
 
   @override
   @JsonKey()
@@ -257,14 +256,13 @@ class _$HomeStateImpl extends _HomeState {
       __$$HomeStateImplCopyWithImpl<_$HomeStateImpl>(this, _$identity);
 }
 
-abstract class _HomeState extends HomeState {
+abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final bool isLoading,
       final Repository? repository,
       final AppError? error,
       final String? searcherQuery,
       final IssuesList? issues}) = _$HomeStateImpl;
-  const _HomeState._() : super._();
 
   @override
   bool get isLoading;

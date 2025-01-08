@@ -33,6 +33,9 @@ class _SplashViewState extends State<SplashView>
 
   @override
   void dispose() {
+    controller.removeListener(() {
+      setState(() {});
+    });
     controller.dispose();
     super.dispose();
   }

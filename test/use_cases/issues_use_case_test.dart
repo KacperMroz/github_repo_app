@@ -26,8 +26,7 @@ void main() {
   });
 
   group('GetIssuesForRepoUseCase', () {
-    const tParam = 'test_repo';
-    const tParam2 = 'test_owner';
+    var tParam = GetIssuesForRepoParams(owner: 'test_owner', repo: 'test_repo');
     const tIssuesList = IssuesList(items: [Issue(id: 1, title: 'Issue 1')]);
     const tAppError = AppError.unknown();
 
@@ -36,11 +35,10 @@ void main() {
       when(() => mockIssueRepository.getIssuesForRepo(any(), any()))
           .thenAnswer((_) async => const Right(tIssuesList));
 
-      final result = await mockGetIssuesForRepoUseCase.call(
-          param: tParam, param2: tParam2);
+      final result = await mockGetIssuesForRepoUseCase.call(param: tParam);
 
       expect(result, const Right(tIssuesList));
-      verify(() => mockIssueRepository.getIssuesForRepo(tParam, tParam2));
+      verify(() => mockIssueRepository.getIssuesForRepo(tParam.owner, tParam.repo));
       verifyNoMoreInteractions(mockIssueRepository);
     });
 
@@ -50,10 +48,10 @@ void main() {
           .thenAnswer((_) async => const Left(tAppError));
 
       final result = await mockGetIssuesForRepoUseCase.call(
-          param: tParam, param2: tParam2);
+          param: tParam);
 
       expect(result, const Left(tAppError));
-      verify(() => mockIssueRepository.getIssuesForRepo(tParam, tParam2));
+      verify(() => mockIssueRepository.getIssuesForRepo(tParam.owner, tParam.repo));
       verifyNoMoreInteractions(mockIssueRepository);
     });
   });

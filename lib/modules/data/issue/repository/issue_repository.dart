@@ -7,7 +7,7 @@ import 'package:github_repo_app/modules/foundation/utils/exception_handler.dart'
 import 'package:github_repo_app/services/api_client.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: IssueRepository)
+@Injectable(as: IssueRepository)
 class IssueRepositoryImpl extends IssueRepository {
   final ApiClient apiClient;
 
@@ -17,7 +17,7 @@ class IssueRepositoryImpl extends IssueRepository {
   Future<Either<AppError, IssuesList>> getIssuesForRepo(
       String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
-      final Response response = await apiClient
+      final response = await apiClient
           .get('/repos/$owner/$repoName/issues');
       return IssuesList.fromJson({'items': response.data});
     });

@@ -155,10 +155,9 @@ class __$$PullRequestStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PullRequestStateImpl extends _PullRequestState {
+class _$PullRequestStateImpl implements _PullRequestState {
   const _$PullRequestStateImpl(
-      {this.isLoading = false, this.pullRequests, this.error})
-      : super._();
+      {this.isLoading = false, this.pullRequests, this.error});
 
   @override
   @JsonKey()
@@ -198,12 +197,11 @@ class _$PullRequestStateImpl extends _PullRequestState {
           this, _$identity);
 }
 
-abstract class _PullRequestState extends PullRequestState {
+abstract class _PullRequestState implements PullRequestState {
   const factory _PullRequestState(
       {final bool isLoading,
       final PullRequestsList? pullRequests,
       final AppError? error}) = _$PullRequestStateImpl;
-  const _PullRequestState._() : super._();
 
   @override
   bool get isLoading;

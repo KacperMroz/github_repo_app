@@ -14,12 +14,18 @@ class IssuesCubit extends Cubit<IssuesState> {
   final GetIssuesForRepoUseCase _getIssuesByRepoUseCase;
 
   Future<void> getIssuesByRepo(String owner, String repo) async {
-    (await _getIssuesByRepoUseCase(param: owner, param2: repo)).fold(
-      (l) => emit(
-        state.copyWith(error: l),
+    (await _getIssuesByRepoUseCase(
+      param: GetIssuesForRepoParams(
+        owner: owner,
+        repo: repo,
       ),
-      (r) => emit(
-        state.copyWith(issues: r),
+    ))
+        .fold(
+      (error) => emit(
+        state.copyWith(error: error),
+      ),
+      (repository) => emit(
+        state.copyWith(issues: repository),
       ),
     );
   }
@@ -32,6 +38,4 @@ class IssuesState with _$IssuesState {
     IssuesList? issues,
     AppError? error,
   }) = _IssuesState;
-
-  const IssuesState._();
 }

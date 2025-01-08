@@ -18,7 +18,7 @@ void main() {
   });
 
   group('GetReposByNameUseCase', () {
-    const tRepoName = 'flutter';
+    var tParam = GetReposByNameParams(name: 'flutter');
     const tRepository = Repository(
       items: [
         RepositoryData(
@@ -35,10 +35,10 @@ void main() {
       when(() => mockGithubRepoRepository.getReposByName(any()))
           .thenAnswer((_) async => const Right(tRepository));
 
-      final result = await mockGetReposByNameUseCase.call(param: tRepoName);
+      final result = await mockGetReposByNameUseCase.call(param: tParam);
 
       expect(result, const Right(tRepository));
-      verify(() => mockGithubRepoRepository.getReposByName(tRepoName));
+      verify(() => mockGithubRepoRepository.getReposByName(tParam.name));
       verifyNoMoreInteractions(mockGithubRepoRepository);
     });
 
@@ -47,10 +47,10 @@ void main() {
       when(() => mockGithubRepoRepository.getReposByName(any()))
           .thenAnswer((_) async => const Left(tError));
 
-      final result = await mockGetReposByNameUseCase.call(param: tRepoName);
+      final result = await mockGetReposByNameUseCase.call(param: tParam);
 
       expect(result, const Left(tError));
-      verify(() => mockGithubRepoRepository.getReposByName(tRepoName));
+      verify(() => mockGithubRepoRepository.getReposByName(tParam.name));
       verifyNoMoreInteractions(mockGithubRepoRepository);
     });
 
@@ -59,7 +59,7 @@ void main() {
       when(() => mockGithubRepoRepository.getReposByName(any()))
           .thenAnswer((_) async => const Left(tError));
 
-      final result = await mockGetReposByNameUseCase.call(param: '');
+      final result = await mockGetReposByNameUseCase.call(param: GetReposByNameParams(name: ''));
 
       expect(result, const Left(tError));
       verify(() => mockGithubRepoRepository.getReposByName(''));

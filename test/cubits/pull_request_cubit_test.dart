@@ -18,6 +18,10 @@ void main() {
     cubit = PullRequestCubit(mockGetPullRequestForRepoUseCase);
   });
 
+  setUpAll(() {
+    registerFallbackValue(GetPullRequestForRepoParams(owner: '', repo: ''));
+  });
+
   group('PullRequestCubit', () {
     const tOwnerName = 'test_owner';
     const tRepoName = 'test_repo';
@@ -27,7 +31,7 @@ void main() {
     blocTest<PullRequestCubit, PullRequestState>(
       'emits PullRequestState with pullRequests when getPullRequestByRepo is successful',
       build: () {
-        when(() => mockGetPullRequestForRepoUseCase(param: any(named: 'param'), param2: any(named: 'param2')))
+        when(() => mockGetPullRequestForRepoUseCase(param: any(named: 'param')))
             .thenAnswer((_) async => const Right(tPullRequestsList));
         return cubit;
       },
@@ -40,7 +44,7 @@ void main() {
     blocTest<PullRequestCubit, PullRequestState>(
       'emits PullRequestState with error when getPullRequestByRepo fails',
       build: () {
-        when(() => mockGetPullRequestForRepoUseCase(param: any(named: 'param'), param2: any(named: 'param2')))
+        when(() => mockGetPullRequestForRepoUseCase(param: any(named: 'param')))
             .thenAnswer((_) async => const Left(tAppError));
         return cubit;
       },
