@@ -17,6 +17,12 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -30,8 +36,8 @@ class _HomePageState extends State<HomePage> {
             onSearchPressed: _onSearchPressed,
             repositories: state.repository,
             isLoading: state.isLoading,
-            onShowIssuePressed: (repo) => _onShowIssuePressed(repo),
-            onShowPRsPressed: (repo) => _onShowPRPressed(repo),
+            onShowIssuePressed: _onShowIssuePressed,
+            onShowPRsPressed: _onShowPRPressed,
           );
         },
       ),

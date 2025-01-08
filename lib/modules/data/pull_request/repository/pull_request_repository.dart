@@ -7,7 +7,7 @@ import 'package:github_repo_app/modules/foundation/utils/exception_handler.dart'
 import 'package:github_repo_app/services/api_client.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: PullRequestRepository)
+@Injectable(as: PullRequestRepository)
 class PullRequestRepositoryImpl extends PullRequestRepository {
   final ApiClient apiClient;
 
@@ -17,7 +17,7 @@ class PullRequestRepositoryImpl extends PullRequestRepository {
   Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(
       String owner, String repoName) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
-      final Response response = await apiClient
+      final response = await apiClient
           .get('/repos/$owner/$repoName/pulls');
       return PullRequestsList.fromJson({'items': response.data});
     });

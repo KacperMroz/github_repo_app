@@ -7,13 +7,21 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetReposByNameUseCase
-    implements OneParamUseCase<AppError, Repository, String> {
+    implements ParamUseCase<AppError, Repository, GetReposByNameParams> {
   GetReposByNameUseCase(this._githubRepoRepository);
 
   final GithubRepoRepository _githubRepoRepository;
 
   @override
-  Future<Either<AppError, Repository>> call({required String param}) {
-    return _githubRepoRepository.getReposByName(param);
+  Future<Either<AppError, Repository>> call({required GetReposByNameParams param}) {
+    return _githubRepoRepository.getReposByName(param.name);
   }
+}
+
+class GetReposByNameParams {
+  GetReposByNameParams({
+    required this.name,
+  });
+
+  final String name;
 }

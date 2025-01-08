@@ -7,7 +7,7 @@ import 'package:github_repo_app/modules/foundation/utils/exception_handler.dart'
 import 'package:github_repo_app/services/api_client.dart';
 import 'package:injectable/injectable.dart';
 
-@Singleton(as: GithubRepoRepository)
+@Injectable(as: GithubRepoRepository)
 class GithubRepoRepositoryImpl extends GithubRepoRepository {
   final ApiClient apiClient;
 
@@ -16,7 +16,7 @@ class GithubRepoRepositoryImpl extends GithubRepoRepository {
   @override
   Future<Either<AppError, Repository>> getReposByName(String name) async {
     return ExceptionHandler.runWithErrorsHandling(() async {
-      final Response response = await apiClient.get(
+      final response = await apiClient.get(
           '/search/repositories?q=$name&sort=stars&order=desc');
       return Repository.fromJson(response.data);
     });

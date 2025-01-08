@@ -16,12 +16,16 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> searchRepository(String param) async {
     emit(state.copyWith(isLoading: true));
-    (await _getReposByNameUseCase(param: param)).fold(
-      (l) => emit(
-        state.copyWith(error: l, isLoading: false),
+    (await _getReposByNameUseCase(
+      param: GetReposByNameParams(name: param),
+    ))
+        .fold(
+      (error) => emit(
+        state.copyWith(error: error, isLoading: false),
       ),
-      (r) => emit(
-        state.copyWith(repository: r, searcherQuery: param, isLoading: false),
+      (repository) => emit(
+        state.copyWith(
+            repository: repository, searcherQuery: param, isLoading: false),
       ),
     );
   }
@@ -36,6 +40,4 @@ class HomeState with _$HomeState {
     String? searcherQuery,
     IssuesList? issues,
   }) = _HomeState;
-
-  const HomeState._();
 }

@@ -6,14 +6,24 @@ import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetIssuesForRepoUseCase implements ParamUseCase<AppError, IssuesList> {
+class GetIssuesForRepoUseCase implements ParamUseCase<AppError, IssuesList, GetIssuesForRepoParams> {
   GetIssuesForRepoUseCase(this._issueRepository);
 
   final IssueRepository _issueRepository;
 
   @override
   Future<Either<AppError, IssuesList>> call(
-      {required dynamic param, required dynamic param2}) {
-    return _issueRepository.getIssuesForRepo(param, param2);
+      {required GetIssuesForRepoParams param}) {
+    return _issueRepository.getIssuesForRepo(param.owner, param.repo);
   }
+}
+
+class GetIssuesForRepoParams {
+  GetIssuesForRepoParams({
+    required this.owner,
+    required this.repo,
+  });
+
+  final String owner;
+  final String repo;
 }

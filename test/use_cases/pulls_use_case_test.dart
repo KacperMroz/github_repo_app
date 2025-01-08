@@ -18,8 +18,7 @@ void main() {
   });
 
   group('GetPullRequestForRepoUseCase', () {
-    const tRepoName = 'test_repo';
-    const tOwnerName = 'test_owner';
+    var tParam = GetPullRequestForRepoParams(owner: 'test_owner', repo: 'test_repo');
     const tPullRequestsList = PullRequestsList(items: [PullRequest(id: 1, title: 'Pull Request 1')]);
     const tAppError = AppError.unknown();
 
@@ -27,10 +26,10 @@ void main() {
       when(() => mockPullRequestRepository.getPullRequestsForRepo(any(), any()))
           .thenAnswer((_) async => const Right(tPullRequestsList));
 
-      final result = await useCase.call(param: tRepoName, param2: tOwnerName);
+      final result = await useCase.call(param: tParam);
 
       expect(result, const Right(tPullRequestsList));
-      verify(() => mockPullRequestRepository.getPullRequestsForRepo(tRepoName, tOwnerName));
+      verify(() => mockPullRequestRepository.getPullRequestsForRepo(tParam.owner, tParam.repo));
       verifyNoMoreInteractions(mockPullRequestRepository);
     });
 
@@ -38,10 +37,10 @@ void main() {
       when(() => mockPullRequestRepository.getPullRequestsForRepo(any(), any()))
           .thenAnswer((_) async => const Left(tAppError));
 
-      final result = await useCase.call(param: tRepoName, param2: tOwnerName);
+      final result = await useCase.call(param: tParam,);
 
       expect(result, const Left(tAppError));
-      verify(() => mockPullRequestRepository.getPullRequestsForRepo(tRepoName, tOwnerName));
+      verify(() => mockPullRequestRepository.getPullRequestsForRepo(tParam.owner, tParam.repo));
       verifyNoMoreInteractions(mockPullRequestRepository);
     });
   });

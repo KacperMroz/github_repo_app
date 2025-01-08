@@ -155,9 +155,8 @@ class __$$IssuesStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$IssuesStateImpl extends _IssuesState {
-  const _$IssuesStateImpl({this.isLoading = false, this.issues, this.error})
-      : super._();
+class _$IssuesStateImpl implements _IssuesState {
+  const _$IssuesStateImpl({this.isLoading = false, this.issues, this.error});
 
   @override
   @JsonKey()
@@ -195,12 +194,11 @@ class _$IssuesStateImpl extends _IssuesState {
       __$$IssuesStateImplCopyWithImpl<_$IssuesStateImpl>(this, _$identity);
 }
 
-abstract class _IssuesState extends IssuesState {
+abstract class _IssuesState implements IssuesState {
   const factory _IssuesState(
       {final bool isLoading,
       final IssuesList? issues,
       final AppError? error}) = _$IssuesStateImpl;
-  const _IssuesState._() : super._();
 
   @override
   bool get isLoading;

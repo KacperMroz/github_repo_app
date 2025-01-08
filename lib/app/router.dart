@@ -33,26 +33,32 @@ final router =
         GoRoute(
             path: NavigationService.issue,
             name: 'issuePage',
-            builder: (context, state) => BlocProvider(
+            builder: (context, state) {
+              final owner = state.pathParameters['owner'] ?? '';
+              final repoName = state.pathParameters['repoName'] ?? '';
+              return BlocProvider(
                   create: (_) => getIt.get<IssuesCubit>()
-                    ..getIssuesByRepo(state.pathParameters['owner']!,
-                        state.pathParameters['repoName']!),
+                    ..getIssuesByRepo(owner, repoName),
                   child: IssuesPage(
-                    owner: state.pathParameters['owner'] ?? '',
-                    repoName: state.pathParameters['repoName'] ?? '',
+                    owner: owner,
+                    repoName: repoName,
                   ),
-                )),
+                );
+            }),
         GoRoute(
             path: NavigationService.pullRequest,
             name: 'pullRequestPage',
-            builder: (context, state) => BlocProvider(
+            builder: (context, state) {
+              final owner = state.pathParameters['owner'] ?? '';
+              final repoName = state.pathParameters['repoName'] ?? '';
+              return BlocProvider(
                   create: (_) => getIt.get<PullRequestCubit>()
-                    ..getPullRequestByRepo(state.pathParameters['owner']!,
-                        state.pathParameters['repoName']!),
+                    ..getPullRequestByRepo(owner, repoName),
                   child: PullRequestPage(
-                    owner: state.pathParameters['owner'] ?? '',
-                    repoName: state.pathParameters['repoName'] ?? '',
+                    owner: owner,
+                    repoName: repoName,
                   ),
-                ))
+                );
+            })
       ]),
 ]);

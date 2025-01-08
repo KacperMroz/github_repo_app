@@ -53,15 +53,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i798.SplashCubit>(() => _i798.SplashCubit());
     gh.singleton<_i361.Dio>(() => dioModule.dio());
     gh.singleton<_i868.ApiClient>(() => _i868.ApiClient(gh<_i361.Dio>()));
-    gh.singleton<_i18.PullRequestRepository>(
+    gh.factory<_i18.PullRequestRepository>(
         () => _i801.PullRequestRepositoryImpl(gh<_i868.ApiClient>()));
-    gh.singleton<_i105.GithubRepoRepository>(
+    gh.factory<_i105.GithubRepoRepository>(
         () => _i912.GithubRepoRepositoryImpl(gh<_i868.ApiClient>()));
     gh.factory<_i269.GetReposByNameUseCase>(
         () => _i269.GetReposByNameUseCase(gh<_i105.GithubRepoRepository>()));
     gh.singleton<_i777.HomeCubit>(
         () => _i777.HomeCubit(gh<_i269.GetReposByNameUseCase>()));
-    gh.singleton<_i585.IssueRepository>(
+    gh.factory<_i585.IssueRepository>(
         () => _i876.IssueRepositoryImpl(gh<_i868.ApiClient>()));
     gh.factory<_i790.GetPullRequestForRepoUseCase>(() =>
         _i790.GetPullRequestForRepoUseCase(gh<_i18.PullRequestRepository>()));
