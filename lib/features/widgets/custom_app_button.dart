@@ -36,7 +36,7 @@ class CustomAppButton extends StatelessWidget {
               Icons.arrow_forward_ios,
               color: AppColors.appWhite,
               size: 10,
-            )
+            ),
           ],
         ),
       ),

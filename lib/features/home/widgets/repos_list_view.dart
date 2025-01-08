@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github_repo_app/features/home/widgets/repo_list_view_item.dart';
-import 'package:github_repo_app/features/widgets/custom_app_button.dart';
 import 'package:github_repo_app/modules/domain/github_repo/model/repository.dart';
-import 'package:github_repo_app/modules/foundation/theme/app_colors.dart';
 
 class ReposListView extends StatelessWidget {
   const ReposListView({

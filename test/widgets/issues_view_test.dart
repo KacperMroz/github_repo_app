@@ -11,7 +11,11 @@ void main() {
         'displays list of issues when issues are not empty',
         (WidgetTester tester) async {
           const issues = IssuesList(
-              items: [Issue(title: 'Issue 1'), Issue(title: 'Issue 2')]);
+            items: [
+              Issue(title: 'Issue 1'),
+              Issue(title: 'Issue 2'),
+            ],
+          );
           await tester.pumpWidget(
             const MaterialApp(
               home: Scaffold(
@@ -28,7 +32,7 @@ void main() {
       testWidgets(
         'displays empty list when issues are empty',
         (WidgetTester tester) async {
-          const issues = IssuesList(items: []);
+          const issues = IssuesList();
           await tester.pumpWidget(
             const MaterialApp(
               home: Scaffold(

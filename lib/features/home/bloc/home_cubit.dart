@@ -25,7 +25,10 @@ class HomeCubit extends Cubit<HomeState> {
       ),
       (repository) => emit(
         state.copyWith(
-            repository: repository, searcherQuery: param, isLoading: false),
+          repository: repository,
+          searcherQuery: param,
+          isLoading: false,
+        ),
       ),
     );
   }

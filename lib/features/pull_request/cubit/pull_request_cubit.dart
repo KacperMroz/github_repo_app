@@ -18,8 +18,12 @@ class PullRequestCubit extends Cubit<PullRequestState> {
     (await _getPullRequestForRepoUseCase(
       param: GetPullRequestForRepoParams(owner: owner, repo: repo),
     ))
-        .fold((error) => emit(state.copyWith(error: error)),
-            (repository) => emit(state.copyWith(pullRequests: repository)));
+        .fold(
+      (error) => emit(state.copyWith(error: error)),
+      (repository) => emit(
+        state.copyWith(pullRequests: repository),
+      ),
+    );
   }
 }
 

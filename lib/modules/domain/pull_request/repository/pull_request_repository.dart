@@ -4,5 +4,7 @@ import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
 
 abstract class PullRequestRepository {
   Future<Either<AppError, PullRequestsList>> getPullRequestsForRepo(
-      String owner, String repoName);
+    String owner,
+    String repoName,
+  );
 }

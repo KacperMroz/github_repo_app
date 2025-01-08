@@ -1,13 +1,14 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:github_repo_app/features/issues/cubit/issues_cubit.dart';
 import 'package:github_repo_app/modules/domain/issue/model/issue.dart';
 import 'package:github_repo_app/modules/domain/issue/use_case/get_issues_for_repo_use_case.dart';
 import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
+import 'package:mocktail/mocktail.dart';
 
-class MockGetIssuesForRepoUseCase extends Mock implements GetIssuesForRepoUseCase {}
+class MockGetIssuesForRepoUseCase extends Mock
+    implements GetIssuesForRepoUseCase {}
 
 void main() {
   late MockGetIssuesForRepoUseCase mockGetIssuesForRepoUseCase;
@@ -35,7 +36,8 @@ void main() {
       },
       act: (cubit) => cubit.getIssuesByRepo(tOwner, tRepo),
       expect: () => [
-        isA<IssuesState>().having((state) => state.issues, 'issues', tIssuesList),
+        isA<IssuesState>()
+            .having((state) => state.issues, 'issues', tIssuesList),
       ],
     );
 
@@ -50,7 +52,6 @@ void main() {
       expect: () => [
         isA<IssuesState>().having((state) => state.error, 'error', tAppError),
       ],
-
     );
   });
 }

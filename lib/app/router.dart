@@ -14,51 +14,57 @@ import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
-final router =
-    GoRouter(navigatorKey: _rootNavigatorKey, initialLocation: '/', routes: [
-  GoRoute(
-    path: NavigationService.splash,
-    builder: (context, state) => BlocProvider(
-      create: (_) => getIt.get<SplashCubit>()..initialize(),
-      child: const SplashPage(),
+final router = GoRouter(
+  navigatorKey: _rootNavigatorKey,
+  initialLocation: '/',
+  routes: [
+    GoRoute(
+      path: NavigationService.splash,
+      builder: (context, state) => BlocProvider(
+        create: (_) => getIt.get<SplashCubit>()..initialize(),
+        child: const SplashPage(),
+      ),
     ),
-  ),
-  GoRoute(
+    GoRoute(
       path: NavigationService.home,
       builder: (context, state) => BlocProvider(
-            create: (_) => getIt.get<HomeCubit>(),
-            child: const HomePage(),
-          ),
+        create: (_) => getIt.get<HomeCubit>(),
+        child: const HomePage(),
+      ),
       routes: [
         GoRoute(
-            path: NavigationService.issue,
-            name: 'issuePage',
-            builder: (context, state) {
-              final owner = state.pathParameters['owner'] ?? '';
-              final repoName = state.pathParameters['repoName'] ?? '';
-              return BlocProvider(
-                  create: (_) => getIt.get<IssuesCubit>()
-                    ..getIssuesByRepo(owner, repoName),
-                  child: IssuesPage(
-                    owner: owner,
-                    repoName: repoName,
-                  ),
-                );
-            }),
+          path: NavigationService.issue,
+          name: 'issuePage',
+          builder: (context, state) {
+            final owner = state.pathParameters['owner'] ?? '';
+            final repoName = state.pathParameters['repoName'] ?? '';
+            return BlocProvider(
+              create: (_) =>
+                  getIt.get<IssuesCubit>()..getIssuesByRepo(owner, repoName),
+              child: IssuesPage(
+                owner: owner,
+                repoName: repoName,
+              ),
+            );
+          },
+        ),
         GoRoute(
-            path: NavigationService.pullRequest,
-            name: 'pullRequestPage',
-            builder: (context, state) {
-              final owner = state.pathParameters['owner'] ?? '';
-              final repoName = state.pathParameters['repoName'] ?? '';
-              return BlocProvider(
-                  create: (_) => getIt.get<PullRequestCubit>()
-                    ..getPullRequestByRepo(owner, repoName),
-                  child: PullRequestPage(
-                    owner: owner,
-                    repoName: repoName,
-                  ),
-                );
-            })
-      ]),
-]);
+          path: NavigationService.pullRequest,
+          name: 'pullRequestPage',
+          builder: (context, state) {
+            final owner = state.pathParameters['owner'] ?? '';
+            final repoName = state.pathParameters['repoName'] ?? '';
+            return BlocProvider(
+              create: (_) => getIt.get<PullRequestCubit>()
+                ..getPullRequestByRepo(owner, repoName),
+              child: PullRequestPage(
+                owner: owner,
+                repoName: repoName,
+              ),
+            );
+          },
+        ),
+      ],
+    ),
+  ],
+);

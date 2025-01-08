@@ -21,9 +21,15 @@ void main() {
   });
 
   const tRepoName = 'flutter';
-  const tRepository = Repository(items: [
-    RepositoryData(id: 1, name: 'flutter', description: 'A framework by Google')
-  ]);
+  const tRepository = Repository(
+    items: [
+      RepositoryData(
+        id: 1,
+        name: 'flutter',
+        description: 'A framework by Google',
+      ),
+    ],
+  );
   const tError = AppError.unknown();
 
   group('HomeCubit', () {

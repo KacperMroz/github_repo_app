@@ -26,7 +26,6 @@ class RepoListViewItem extends StatelessWidget {
         border: const Border(
           bottom: BorderSide(
             color: AppColors.appGrey,
-            width: 1,
           ),
         ),
       ),
@@ -107,7 +106,7 @@ class RepoListViewItem extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

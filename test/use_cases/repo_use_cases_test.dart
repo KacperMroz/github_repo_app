@@ -18,14 +18,14 @@ void main() {
   });
 
   group('GetReposByNameUseCase', () {
-    var tParam = GetReposByNameParams(name: 'flutter');
+    final tParam = GetReposByNameParams(name: 'flutter');
     const tRepository = Repository(
       items: [
         RepositoryData(
           id: 1,
           name: 'flutter',
           description: 'A framework by Google',
-        )
+        ),
       ],
     );
     const tError = AppError.unknown();
@@ -59,7 +59,9 @@ void main() {
       when(() => mockGithubRepoRepository.getReposByName(any()))
           .thenAnswer((_) async => const Left(tError));
 
-      final result = await mockGetReposByNameUseCase.call(param: GetReposByNameParams(name: ''));
+      final result = await mockGetReposByNameUseCase.call(
+        param: GetReposByNameParams(name: ''),
+      );
 
       expect(result, const Left(tError));
       verify(() => mockGithubRepoRepository.getReposByName(''));

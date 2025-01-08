@@ -13,10 +13,11 @@ class SplashPage extends StatelessWidget {
     return BlocListener<SplashCubit, SplashState>(
       listener: (context, state) {
         state.maybeWhen(
-            success: () {
-              context.go(NavigationService.home);
-            },
-            orElse: () => const SizedBox());
+          success: () {
+            context.go(NavigationService.home);
+          },
+          orElse: () => const SizedBox(),
+        );
       },
       child: const Scaffold(
         backgroundColor: Colors.white,

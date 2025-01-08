@@ -8,11 +8,17 @@ class ApiClient {
 
   ApiClient(this._dio);
 
-  Future<Response<T>> get<T>(String path,
-      {Map<String, dynamic>? queryParameters, Options? options}) async {
+  Future<Response<T>> get<T>(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      final response = await _dio.get<T>(path,
-          queryParameters: queryParameters, options: options);
+      final response = await _dio.get<T>(
+        path,
+        queryParameters: queryParameters,
+        options: options,
+      );
       return response;
     } catch (e) {
       debugPrint('Błąd podczas żądania GET $path: $e');

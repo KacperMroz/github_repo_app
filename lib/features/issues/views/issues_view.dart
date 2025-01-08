@@ -14,7 +14,7 @@ class IssuesView extends StatelessWidget {
       child: ListView.builder(
         itemCount: issues?.items.length ?? 0,
         itemBuilder: (context, index) {
-          var displayIndex = index + 1;
+          final displayIndex = index + 1;
           return Column(
             children: [
               Container(

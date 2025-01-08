@@ -28,8 +28,9 @@ class HomeView extends StatelessWidget {
     return Column(
       children: [
         RepoSearchRow(
-            searchController: searchController,
-            onSearchPressed: onSearchPressed),
+          searchController: searchController,
+          onSearchPressed: onSearchPressed,
+        ),
         const SizedBox(
           height: 8,
         ),
@@ -47,7 +48,8 @@ class HomeView extends StatelessWidget {
               ? ReposListView(
                   repositories: repositories,
                   onShowIssuePressed: onShowIssuePressed,
-                  onShowPRsPressed: onShowPRsPressed)
+                  onShowPRsPressed: onShowPRsPressed,
+                )
               : const Center(
                   child: Text('No repositories found'),
                 ),

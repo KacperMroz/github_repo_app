@@ -27,14 +27,12 @@ class RepoSearchRow extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: const BorderSide(
                     color: AppColors.appGrey,
-                    width: 1.0,
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: const BorderSide(
                     color: AppColors.appGrey,
-                    width: 1.0,
                   ),
                 ),
                 hintText: "Search for a repository...",
@@ -43,9 +41,6 @@ class RepoSearchRow extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
-                  borderSide: const BorderSide(
-                    width: 1.0,
-                  ),
                 ),
               ),
             ),

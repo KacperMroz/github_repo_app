@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:github_repo_app/modules/domain/github_repo/model/repository.dart';
 import 'package:github_repo_app/modules/domain/github_repo/repository/github_repo_repository.dart';
 import 'package:github_repo_app/modules/foundation/errors/app_error.dart';
@@ -14,11 +13,10 @@ class GithubRepoRepositoryImpl extends GithubRepoRepository {
   GithubRepoRepositoryImpl(this.apiClient);
 
   @override
-  Future<Either<AppError, Repository>> getReposByName(String name) async {
-    return ExceptionHandler.runWithErrorsHandling(() async {
-      final response = await apiClient.get(
-          '/search/repositories?q=$name&sort=stars&order=desc');
-      return Repository.fromJson(response.data);
-    });
-  }
+  Future<Either<AppError, Repository>> getReposByName(String name) async =>
+      ExceptionHandler.runWithErrorsHandling(() async {
+        final response = await apiClient
+            .get('/search/repositories?q=$name&sort=stars&order=desc');
+        return Repository.fromJson(response.data);
+      });
 }
