@@ -8,7 +8,7 @@ class GitHubRepoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'ProMediaApp',
+      title: 'GitHubRepoApp',
       theme: customLightTheme,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
