@@ -38,7 +38,7 @@ class HomeCubit extends Cubit<HomeState> {
 class HomeState with _$HomeState {
   const factory HomeState({
     @Default(false) bool isLoading,
-    Repository? repository,
+    List<RepositoryData>? repository,
     AppError? error,
     String? searcherQuery,
     IssuesList? issues,

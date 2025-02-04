@@ -20,8 +20,8 @@ class PullRequestCubit extends Cubit<PullRequestState> {
     ))
         .fold(
       (error) => emit(state.copyWith(error: error)),
-      (repository) => emit(
-        state.copyWith(pullRequests: repository),
+      (pulls) => emit(
+        state.copyWith(pullRequests: pulls),
       ),
     );
   }
@@ -31,7 +31,7 @@ class PullRequestCubit extends Cubit<PullRequestState> {
 class PullRequestState with _$PullRequestState {
   const factory PullRequestState({
     @Default(false) bool isLoading,
-    PullRequestsList? pullRequests,
+    List<PullRequest>? pullRequests,
     AppError? error,
   }) = _PullRequestState;
 }

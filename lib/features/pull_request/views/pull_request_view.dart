@@ -5,14 +5,14 @@ import 'package:github_repo_app/modules/foundation/theme/app_colors.dart';
 class PullRequestView extends StatelessWidget {
   const PullRequestView({super.key, required this.pulls});
 
-  final PullRequestsList? pulls;
+  final List<PullRequest>? pulls;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: ListView.builder(
-        itemCount: pulls?.items.length ?? 0,
+        itemCount: pulls?.length ?? 0,
         itemBuilder: (context, index) {
           final displayIndex = index + 1;
           return Column(
@@ -21,7 +21,7 @@ class PullRequestView extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "$displayIndex.    ${pulls?.items[index].title ?? " - "}",
+                  "$displayIndex.    ${pulls?[index].title ?? " - "}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),

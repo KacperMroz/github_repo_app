@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
 
   final TextEditingController searchController;
   final VoidCallback onSearchPressed;
-  final Repository? repositories;
+  final List<RepositoryData>? repositories;
   final Function(RepositoryData repo) onShowIssuePressed;
   final Function(RepositoryData repo) onShowPRsPressed;
   final bool isLoading;
@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
         if (isLoading)
           const Center(child: CircularProgressIndicator())
         else
-          repositories != null && repositories?.items.isNotEmpty == true
+          repositories != null && repositories?.isNotEmpty == true
               ? ReposListView(
                   repositories: repositories,
                   onShowIssuePressed: onShowIssuePressed,

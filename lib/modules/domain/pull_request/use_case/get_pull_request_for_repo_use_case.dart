@@ -7,14 +7,17 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetPullRequestForRepoUseCase
-    implements ParamUseCase<AppError, PullRequestsList, GetPullRequestForRepoParams> {
+    implements
+        ParamUseCase<AppError, List<PullRequest>, GetPullRequestForRepoParams> {
   GetPullRequestForRepoUseCase(this._pullRequestRepository);
 
   final PullRequestRepository _pullRequestRepository;
 
   @override
-  Future<Either<AppError, PullRequestsList>> call({required GetPullRequestForRepoParams param}) {
-    return _pullRequestRepository.getPullRequestsForRepo(param.owner, param.repo);
+  Future<Either<AppError, List<PullRequest>>> call(
+      {required GetPullRequestForRepoParams param}) {
+    return _pullRequestRepository.getPullRequestsForRepo(
+        param.owner, param.repo);
   }
 }
 

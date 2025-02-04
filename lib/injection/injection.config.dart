@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:github_repo_app/app/api_module.dart' as _i526;
 import 'package:github_repo_app/app/dio_module.dart' as _i37;
 import 'package:github_repo_app/features/home/bloc/home_cubit.dart' as _i777;
 import 'package:github_repo_app/features/issues/cubit/issues_cubit.dart'
@@ -17,10 +18,16 @@ import 'package:github_repo_app/features/issues/cubit/issues_cubit.dart'
 import 'package:github_repo_app/features/pull_request/cubit/pull_request_cubit.dart'
     as _i553;
 import 'package:github_repo_app/features/splash/bloc/splash_bloc.dart' as _i798;
+import 'package:github_repo_app/modules/data/github_repo/api/api_client.dart'
+    as _i543;
 import 'package:github_repo_app/modules/data/github_repo/repository/github_repo_repository.dart'
     as _i912;
-import 'package:github_repo_app/modules/data/issue/repository/issue_repository.dart'
-    as _i876;
+import 'package:github_repo_app/modules/data/issue/api/api_client.dart'
+    as _i180;
+import 'package:github_repo_app/modules/data/issue/repository/issue_repository_impl.dart'
+    as _i302;
+import 'package:github_repo_app/modules/data/pull_request/api/api_client.dart'
+    as _i608;
 import 'package:github_repo_app/modules/data/pull_request/repository/pull_request_repository.dart'
     as _i801;
 import 'package:github_repo_app/modules/domain/github_repo/repository/github_repo_repository.dart'
@@ -50,25 +57,32 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
+    final apiModule = _$ApiModule();
     gh.factory<_i798.SplashCubit>(() => _i798.SplashCubit());
     gh.singleton<_i361.Dio>(() => dioModule.dio());
+    gh.factory<_i180.IssueApiClient>(
+        () => apiModule.provideIssueClient(gh<_i361.Dio>()));
+    gh.factory<_i608.PullRequestApiClient>(
+        () => apiModule.providePullRequestClient(gh<_i361.Dio>()));
+    gh.factory<_i543.RepoApiClient>(
+        () => apiModule.provideRepoClient(gh<_i361.Dio>()));
     gh.singleton<_i868.ApiClient>(() => _i868.ApiClient(gh<_i361.Dio>()));
-    gh.factory<_i18.PullRequestRepository>(
-        () => _i801.PullRequestRepositoryImpl(gh<_i868.ApiClient>()));
     gh.factory<_i105.GithubRepoRepository>(
-        () => _i912.GithubRepoRepositoryImpl(gh<_i868.ApiClient>()));
-    gh.factory<_i269.GetReposByNameUseCase>(
-        () => _i269.GetReposByNameUseCase(gh<_i105.GithubRepoRepository>()));
-    gh.singleton<_i777.HomeCubit>(
-        () => _i777.HomeCubit(gh<_i269.GetReposByNameUseCase>()));
-    gh.factory<_i585.IssueRepository>(
-        () => _i876.IssueRepositoryImpl(gh<_i868.ApiClient>()));
+        () => _i912.GithubRepoRepositoryImpl(gh<_i543.RepoApiClient>()));
+    gh.factory<_i18.PullRequestRepository>(() =>
+        _i801.PullRequestRepositoryImpl(gh<_i608.PullRequestApiClient>()));
     gh.factory<_i790.GetPullRequestForRepoUseCase>(() =>
         _i790.GetPullRequestForRepoUseCase(gh<_i18.PullRequestRepository>()));
     gh.factory<_i553.PullRequestCubit>(
         () => _i553.PullRequestCubit(gh<_i790.GetPullRequestForRepoUseCase>()));
+    gh.factory<_i585.IssueRepository>(
+        () => _i302.IssueRepositoryImpl(gh<_i180.IssueApiClient>()));
     gh.factory<_i289.GetIssuesForRepoUseCase>(
         () => _i289.GetIssuesForRepoUseCase(gh<_i585.IssueRepository>()));
+    gh.factory<_i269.GetReposByNameUseCase>(
+        () => _i269.GetReposByNameUseCase(gh<_i105.GithubRepoRepository>()));
+    gh.singleton<_i777.HomeCubit>(
+        () => _i777.HomeCubit(gh<_i269.GetReposByNameUseCase>()));
     gh.factory<_i457.IssuesCubit>(
         () => _i457.IssuesCubit(gh<_i289.GetIssuesForRepoUseCase>()));
     return this;
@@ -76,3 +90,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$DioModule extends _i37.DioModule {}
+
+class _$ApiModule extends _i526.ApiModule {}
