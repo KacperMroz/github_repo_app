@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$IssuesState {
   bool get isLoading => throw _privateConstructorUsedError;
-  IssuesList? get issues => throw _privateConstructorUsedError;
+  List<Issue>? get issues => throw _privateConstructorUsedError;
   AppError? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of IssuesState
@@ -33,9 +33,8 @@ abstract class $IssuesStateCopyWith<$Res> {
           IssuesState value, $Res Function(IssuesState) then) =
       _$IssuesStateCopyWithImpl<$Res, IssuesState>;
   @useResult
-  $Res call({bool isLoading, IssuesList? issues, AppError? error});
+  $Res call({bool isLoading, List<Issue>? issues, AppError? error});
 
-  $IssuesListCopyWith<$Res>? get issues;
   $AppErrorCopyWith<$Res>? get error;
 }
 
@@ -66,26 +65,12 @@ class _$IssuesStateCopyWithImpl<$Res, $Val extends IssuesState>
       issues: freezed == issues
           ? _value.issues
           : issues // ignore: cast_nullable_to_non_nullable
-              as IssuesList?,
+              as List<Issue>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as AppError?,
     ) as $Val);
-  }
-
-  /// Create a copy of IssuesState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $IssuesListCopyWith<$Res>? get issues {
-    if (_value.issues == null) {
-      return null;
-    }
-
-    return $IssuesListCopyWith<$Res>(_value.issues!, (value) {
-      return _then(_value.copyWith(issues: value) as $Val);
-    });
   }
 
   /// Create a copy of IssuesState
@@ -111,10 +96,8 @@ abstract class _$$IssuesStateImplCopyWith<$Res>
       __$$IssuesStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, IssuesList? issues, AppError? error});
+  $Res call({bool isLoading, List<Issue>? issues, AppError? error});
 
-  @override
-  $IssuesListCopyWith<$Res>? get issues;
   @override
   $AppErrorCopyWith<$Res>? get error;
 }
@@ -142,9 +125,9 @@ class __$$IssuesStateImplCopyWithImpl<$Res>
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       issues: freezed == issues
-          ? _value.issues
+          ? _value._issues
           : issues // ignore: cast_nullable_to_non_nullable
-              as IssuesList?,
+              as List<Issue>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -156,13 +139,23 @@ class __$$IssuesStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$IssuesStateImpl implements _IssuesState {
-  const _$IssuesStateImpl({this.isLoading = false, this.issues, this.error});
+  const _$IssuesStateImpl(
+      {this.isLoading = false, final List<Issue>? issues, this.error})
+      : _issues = issues;
 
   @override
   @JsonKey()
   final bool isLoading;
+  final List<Issue>? _issues;
   @override
-  final IssuesList? issues;
+  List<Issue>? get issues {
+    final value = _issues;
+    if (value == null) return null;
+    if (_issues is EqualUnmodifiableListView) return _issues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final AppError? error;
 
@@ -178,12 +171,13 @@ class _$IssuesStateImpl implements _IssuesState {
             other is _$IssuesStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.issues, issues) || other.issues == issues) &&
+            const DeepCollectionEquality().equals(other._issues, _issues) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, issues, error);
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_issues), error);
 
   /// Create a copy of IssuesState
   /// with the given fields replaced by the non-null parameter values.
@@ -197,13 +191,13 @@ class _$IssuesStateImpl implements _IssuesState {
 abstract class _IssuesState implements IssuesState {
   const factory _IssuesState(
       {final bool isLoading,
-      final IssuesList? issues,
+      final List<Issue>? issues,
       final AppError? error}) = _$IssuesStateImpl;
 
   @override
   bool get isLoading;
   @override
-  IssuesList? get issues;
+  List<Issue>? get issues;
   @override
   AppError? get error;
 

@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HomeState {
   bool get isLoading => throw _privateConstructorUsedError;
-  Repository? get repository => throw _privateConstructorUsedError;
+  List<RepositoryData>? get repository => throw _privateConstructorUsedError;
   AppError? get error => throw _privateConstructorUsedError;
   String? get searcherQuery => throw _privateConstructorUsedError;
   IssuesList? get issues => throw _privateConstructorUsedError;
@@ -36,12 +36,11 @@ abstract class $HomeStateCopyWith<$Res> {
   @useResult
   $Res call(
       {bool isLoading,
-      Repository? repository,
+      List<RepositoryData>? repository,
       AppError? error,
       String? searcherQuery,
       IssuesList? issues});
 
-  $RepositoryCopyWith<$Res>? get repository;
   $AppErrorCopyWith<$Res>? get error;
   $IssuesListCopyWith<$Res>? get issues;
 }
@@ -75,7 +74,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       repository: freezed == repository
           ? _value.repository
           : repository // ignore: cast_nullable_to_non_nullable
-              as Repository?,
+              as List<RepositoryData>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -89,20 +88,6 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           : issues // ignore: cast_nullable_to_non_nullable
               as IssuesList?,
     ) as $Val);
-  }
-
-  /// Create a copy of HomeState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $RepositoryCopyWith<$Res>? get repository {
-    if (_value.repository == null) {
-      return null;
-    }
-
-    return $RepositoryCopyWith<$Res>(_value.repository!, (value) {
-      return _then(_value.copyWith(repository: value) as $Val);
-    });
   }
 
   /// Create a copy of HomeState
@@ -144,13 +129,11 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {bool isLoading,
-      Repository? repository,
+      List<RepositoryData>? repository,
       AppError? error,
       String? searcherQuery,
       IssuesList? issues});
 
-  @override
-  $RepositoryCopyWith<$Res>? get repository;
   @override
   $AppErrorCopyWith<$Res>? get error;
   @override
@@ -182,9 +165,9 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       repository: freezed == repository
-          ? _value.repository
+          ? _value._repository
           : repository // ignore: cast_nullable_to_non_nullable
-              as Repository?,
+              as List<RepositoryData>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -206,16 +189,25 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.isLoading = false,
-      this.repository,
+      final List<RepositoryData>? repository,
       this.error,
       this.searcherQuery,
-      this.issues});
+      this.issues})
+      : _repository = repository;
 
   @override
   @JsonKey()
   final bool isLoading;
+  final List<RepositoryData>? _repository;
   @override
-  final Repository? repository;
+  List<RepositoryData>? get repository {
+    final value = _repository;
+    if (value == null) return null;
+    if (_repository is EqualUnmodifiableListView) return _repository;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final AppError? error;
   @override
@@ -235,8 +227,8 @@ class _$HomeStateImpl implements _HomeState {
             other is _$HomeStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.repository, repository) ||
-                other.repository == repository) &&
+            const DeepCollectionEquality()
+                .equals(other._repository, _repository) &&
             (identical(other.error, error) || other.error == error) &&
             (identical(other.searcherQuery, searcherQuery) ||
                 other.searcherQuery == searcherQuery) &&
@@ -245,7 +237,12 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, repository, error, searcherQuery, issues);
+      runtimeType,
+      isLoading,
+      const DeepCollectionEquality().hash(_repository),
+      error,
+      searcherQuery,
+      issues);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +256,7 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final bool isLoading,
-      final Repository? repository,
+      final List<RepositoryData>? repository,
       final AppError? error,
       final String? searcherQuery,
       final IssuesList? issues}) = _$HomeStateImpl;
@@ -267,7 +264,7 @@ abstract class _HomeState implements HomeState {
   @override
   bool get isLoading;
   @override
-  Repository? get repository;
+  List<RepositoryData>? get repository;
   @override
   AppError? get error;
   @override

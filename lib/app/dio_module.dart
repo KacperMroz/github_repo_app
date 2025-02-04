@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:github_repo_app/app/flavor_config.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -13,7 +14,7 @@ abstract class DioModule {
   Dio _getDio() {
     final Dio dio = Dio(
       BaseOptions(
-        baseUrl: 'https://api.github.com',
+        baseUrl: FlavorConfig.instance.variables['API_URL'],
         connectTimeout: const Duration(seconds: 60),
         receiveTimeout: const Duration(seconds: 60),
         sendTimeout: const Duration(seconds: 60),

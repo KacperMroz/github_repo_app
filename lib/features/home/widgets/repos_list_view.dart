@@ -10,7 +10,7 @@ class ReposListView extends StatelessWidget {
     required this.onShowPRsPressed,
   });
 
-  final Repository? repositories;
+  final List<RepositoryData>? repositories;
   final Function(RepositoryData repo) onShowIssuePressed;
   final Function(RepositoryData repo) onShowPRsPressed;
 
@@ -20,9 +20,9 @@ class ReposListView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       height: MediaQuery.of(context).size.height * 0.7,
       child: ListView.builder(
-        itemCount: repositories?.items.length ?? 0,
+        itemCount: repositories?.length ?? 0,
         itemBuilder: (context, index) {
-          final repository = repositories?.items[index];
+          final repository = repositories?[index];
           return RepoListViewItem(
             repository: repository,
             onShowIssuePressed: onShowIssuePressed,

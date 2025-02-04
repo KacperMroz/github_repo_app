@@ -24,8 +24,8 @@ class IssuesCubit extends Cubit<IssuesState> {
       (error) => emit(
         state.copyWith(error: error),
       ),
-      (repository) => emit(
-        state.copyWith(issues: repository),
+      (issues) => emit(
+        state.copyWith(issues: issues),
       ),
     );
   }
@@ -35,7 +35,7 @@ class IssuesCubit extends Cubit<IssuesState> {
 class IssuesState with _$IssuesState {
   const factory IssuesState({
     @Default(false) bool isLoading,
-    IssuesList? issues,
+    List<Issue>? issues,
     AppError? error,
   }) = _IssuesState;
 }

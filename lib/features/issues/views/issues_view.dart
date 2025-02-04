@@ -5,14 +5,14 @@ import 'package:github_repo_app/modules/foundation/theme/app_colors.dart';
 class IssuesView extends StatelessWidget {
   const IssuesView({super.key, required this.issues});
 
-  final IssuesList? issues;
+  final List<Issue>? issues;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: ListView.builder(
-        itemCount: issues?.items.length ?? 0,
+        itemCount: issues?.length ?? 0,
         itemBuilder: (context, index) {
           final displayIndex = index + 1;
           return Column(
@@ -21,7 +21,7 @@ class IssuesView extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "$displayIndex.    ${issues?.items[index].title ?? " - "}",
+                  "$displayIndex.    ${issues?[index].title ?? " - "}",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ),

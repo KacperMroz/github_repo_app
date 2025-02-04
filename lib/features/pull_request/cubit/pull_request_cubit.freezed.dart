@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PullRequestState {
   bool get isLoading => throw _privateConstructorUsedError;
-  PullRequestsList? get pullRequests => throw _privateConstructorUsedError;
+  List<PullRequest>? get pullRequests => throw _privateConstructorUsedError;
   AppError? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of PullRequestState
@@ -33,9 +33,8 @@ abstract class $PullRequestStateCopyWith<$Res> {
           PullRequestState value, $Res Function(PullRequestState) then) =
       _$PullRequestStateCopyWithImpl<$Res, PullRequestState>;
   @useResult
-  $Res call({bool isLoading, PullRequestsList? pullRequests, AppError? error});
+  $Res call({bool isLoading, List<PullRequest>? pullRequests, AppError? error});
 
-  $PullRequestsListCopyWith<$Res>? get pullRequests;
   $AppErrorCopyWith<$Res>? get error;
 }
 
@@ -66,26 +65,12 @@ class _$PullRequestStateCopyWithImpl<$Res, $Val extends PullRequestState>
       pullRequests: freezed == pullRequests
           ? _value.pullRequests
           : pullRequests // ignore: cast_nullable_to_non_nullable
-              as PullRequestsList?,
+              as List<PullRequest>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as AppError?,
     ) as $Val);
-  }
-
-  /// Create a copy of PullRequestState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $PullRequestsListCopyWith<$Res>? get pullRequests {
-    if (_value.pullRequests == null) {
-      return null;
-    }
-
-    return $PullRequestsListCopyWith<$Res>(_value.pullRequests!, (value) {
-      return _then(_value.copyWith(pullRequests: value) as $Val);
-    });
   }
 
   /// Create a copy of PullRequestState
@@ -111,10 +96,8 @@ abstract class _$$PullRequestStateImplCopyWith<$Res>
       __$$PullRequestStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, PullRequestsList? pullRequests, AppError? error});
+  $Res call({bool isLoading, List<PullRequest>? pullRequests, AppError? error});
 
-  @override
-  $PullRequestsListCopyWith<$Res>? get pullRequests;
   @override
   $AppErrorCopyWith<$Res>? get error;
 }
@@ -142,9 +125,9 @@ class __$$PullRequestStateImplCopyWithImpl<$Res>
           : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       pullRequests: freezed == pullRequests
-          ? _value.pullRequests
+          ? _value._pullRequests
           : pullRequests // ignore: cast_nullable_to_non_nullable
-              as PullRequestsList?,
+              as List<PullRequest>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -157,13 +140,24 @@ class __$$PullRequestStateImplCopyWithImpl<$Res>
 
 class _$PullRequestStateImpl implements _PullRequestState {
   const _$PullRequestStateImpl(
-      {this.isLoading = false, this.pullRequests, this.error});
+      {this.isLoading = false,
+      final List<PullRequest>? pullRequests,
+      this.error})
+      : _pullRequests = pullRequests;
 
   @override
   @JsonKey()
   final bool isLoading;
+  final List<PullRequest>? _pullRequests;
   @override
-  final PullRequestsList? pullRequests;
+  List<PullRequest>? get pullRequests {
+    final value = _pullRequests;
+    if (value == null) return null;
+    if (_pullRequests is EqualUnmodifiableListView) return _pullRequests;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final AppError? error;
 
@@ -179,13 +173,14 @@ class _$PullRequestStateImpl implements _PullRequestState {
             other is _$PullRequestStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.pullRequests, pullRequests) ||
-                other.pullRequests == pullRequests) &&
+            const DeepCollectionEquality()
+                .equals(other._pullRequests, _pullRequests) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, pullRequests, error);
+  int get hashCode => Object.hash(runtimeType, isLoading,
+      const DeepCollectionEquality().hash(_pullRequests), error);
 
   /// Create a copy of PullRequestState
   /// with the given fields replaced by the non-null parameter values.
@@ -200,13 +195,13 @@ class _$PullRequestStateImpl implements _PullRequestState {
 abstract class _PullRequestState implements PullRequestState {
   const factory _PullRequestState(
       {final bool isLoading,
-      final PullRequestsList? pullRequests,
+      final List<PullRequest>? pullRequests,
       final AppError? error}) = _$PullRequestStateImpl;
 
   @override
   bool get isLoading;
   @override
-  PullRequestsList? get pullRequests;
+  List<PullRequest>? get pullRequests;
   @override
   AppError? get error;
 

@@ -7,13 +7,13 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetIssuesForRepoUseCase
-    implements ParamUseCase<AppError, IssuesList, GetIssuesForRepoParams> {
+    implements ParamUseCase<AppError, List<Issue>, GetIssuesForRepoParams> {
   GetIssuesForRepoUseCase(this._issueRepository);
 
   final IssueRepository _issueRepository;
 
   @override
-  Future<Either<AppError, IssuesList>> call({
+  Future<Either<AppError, List<Issue>>> call({
     required GetIssuesForRepoParams param,
   }) {
     return _issueRepository.getIssuesForRepo(param.owner, param.repo);
