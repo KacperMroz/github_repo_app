@@ -1,16 +1,72 @@
-# github_repo_app
+![App preview](https://github.com/KacperMroz/github_repo_app/blob/17a7f33da4c5f6d691867a161a08739d4fc89e0c/github_repo.gif)
 
-A new Flutter project.
+# GitHub Repo App
+
+A Github Repo App project created in flutter using Flutter Bloc. App supports Android and IOS.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Th Github Repo App group allows to find the repositories of the user and the details of the repository.
 
-A few resources to get you started if this is your first Flutter project:
+## How to Use
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Step 1:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Download or clone this repo by using the link below:
+
+```
+https://github.com/KacperMroz/github_repo_app
+```
+
+**Step 2:**
+
+Go to project root and execute the following command in console to get the required dependencies:
+
+```
+flutter pub get 
+```
+
+**Step 3:**
+
+This project uses `inject` library that works with code generation, execute the following command to generate files:
+
+```
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
+
+or watch command in order to keep the source code synced automatically:
+
+```
+flutter packages pub run build_runner watch
+```
+
+## GitHub Repo App features
+
+* Splash
+* Home
+* Repository Details
+* Issues
+* Pull Requests
+
+### Libraries & Tools Used
+
+* Bloc
+* Freezed
+* GetIt
+* Dio
+* Retrofit
+* GoRouter
+
+### Folder Structure
+
+```
+lib/
+|- app
+|- features
+|- injection
+|- modules/
+    |- data
+    |- domain
+    |- foundation
+|- services
+```
